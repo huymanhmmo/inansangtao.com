@@ -1,0 +1,28 @@
+#menusite .navbar{margin:0;min-height:0;border:0;background:transparent}
+#menusite .navbar-nav>li.dropdown:hover>.dropdown-menu{display:block}
+#menusite .dropdown-menu{z-index:1100}
+#header .logo img{max-width:100%;height:auto}
+#header .headerSearch form{display:flex}
+#header .headerSearch .form-control{min-width:0}
+#header .headerSearch button{height:34px}
+#slide{position:relative;overflow:hidden}
+#slide .item{position:absolute;inset:0;opacity:0;animation:legacySlide 8s infinite}
+#slide .item:first-child{position:relative;opacity:1;animation-delay:0s}
+#slide .item:nth-child(2){animation-delay:4s}
+#slide .image{width:100%;height:auto;display:block}
+#slide .slide-content{position:absolute;inset:0;display:flex;align-items:center;width:100%;color:#fff;text-shadow:0 1px 3px #222}
+#slide .slide-content h3{font-size:42px;font-weight:700;text-transform:uppercase}
+#slide .slide-content h4{font-size:26px;line-height:1.5}
+#slide .slide-content .btn{display:inline-block;padding:10px 22px;border:1px solid #fff;color:#fff;text-shadow:none}
+#slide .slide-content-img img{max-height:390px;max-width:100%;object-fit:contain}
+.home-product .pg-content{top:0;left:0;right:0}
+.home-product .pg-img{top:260px;left:0;right:0}
+.home-product .col:nth-child(2n) .pg-content{top:190px;left:0;right:0}
+.home-product .col:nth-child(2n) .pg-img{top:auto;left:0;right:0}
+.home-banner .banner img,.production-process .nv-block-banners img{width:100%;height:auto}
+.production-process .item-production:after{content:"";display:block;clear:both}
+.produce-home .list-logo{display:flex;align-items:center;justify-content:space-around;gap:18px;flex-wrap:wrap}
+.produce-home .list-logo li{float:none;margin:0;max-width:130px}
+.produce-home .list-logo li img{width:100%;height:auto}
+@keyframes legacySlide{0%,44%{opacity:1}50%,94%{opacity:0}100%{opacity:1}}
+@media(max-width:767px){#slide .item{position:absolute}#slide .item:first-child{position:relative}#slide .slide-content h3{font-size:23px}#slide .slide-content h4{font-size:16px}#slide .slide-content-img{display:none}.home-product .col .pg-item{height:440px}}

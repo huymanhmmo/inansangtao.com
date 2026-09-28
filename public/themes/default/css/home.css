@@ -1,0 +1,595 @@
+.outstanding-policy {
+    padding: 45px 0;
+    background-color: #e6e7e8;
+    text-align: center
+}
+
+.outstanding-policy .policybox-icon:hover {
+    cursor: pointer;
+    border-color: #ade8fa;
+    transition: all .3s ease-out 0s;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s
+}
+
+.outstanding-policy .policybox-icon {
+    background: #25bce9;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    width: 125px;
+    height: 120px;
+    display: inline-block;
+    border: 8px solid #25bce9;
+    cursor: pointer;
+    transition: all .3s ease-out 0s;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s
+}
+
+.outstanding-policy .policybox-icon .fa {
+    font-size: 48px;
+    line-height: 115px;
+    color: #fff
+}
+
+.outstanding-policy .policybox-heading {
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 12px;
+    margin-top: 24px;
+    position: relative;
+    padding-bottom: 16px;
+    line-height: 18px;
+    letter-spacing: .1px;
+    text-transform: capitalize
+}
+
+.outstanding-policy .policybox-heading:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 70px;
+    left: 50%;
+    margin-left: -35px;
+    height: 1px;
+    background: #c2c2c2
+}
+
+.home-product, .our-capacity {
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.home-product h3 a {
+    color: #fff !important
+}
+
+.outstanding-policy .policybox-text {
+    font-size: 14px;
+    color: #444;
+    padding: 0 12px
+}
+
+.outstanding-policy .policybox-redmore {
+    margin-top: 30px
+}
+
+.outstanding-policy .btn-readmore {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #25bce9 !important;
+    border: 1px solid #25bce9;
+    padding: 15px;
+    border-radius: 5px
+}
+
+.home-product {
+    padding: 60px 0;
+    background-image: url(../images/bg-home-product.jpg)
+}
+
+.home-product .impression-title h3 {
+    color: #fff
+}
+
+.home-product .col .pg-item {
+    position: relative;
+    height: 450px;
+    overflow: hidden
+}
+
+.home-product .col .pg-img {
+    position: relative;
+    height: 190px;
+    overflow: hidden
+}
+
+.home-product .col:nth-child(2n) .pg-img {
+    position: absolute;
+    bottom: 0
+}
+
+.home-product .col .pg-img img {
+    width: 100%;
+    min-height: 190px
+}
+
+.home-product .col .pg-content {
+    position: absolute;
+    text-align: center;
+    background-color: #fff;
+    padding: 30px 15px;
+    height: 260px
+}
+
+.home-product .col:nth-child(2n) .pg-content {
+    background-color: #25bce9
+}
+
+.home-product .col .pg-content h4 a {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-transform: uppercase
+}
+
+.home-product .col .pg-content p {
+    color: #888;
+    text-align: justify;
+    margin-bottom: 30px;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden
+}
+
+.home-blog .info-large .info p, .home-blog .news-item li p, .home-technology .news_cat .content p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden
+}
+
+.home-product .col:nth-child(2n) .pg-content h4 a, .home-product .col:nth-child(2n) .pg-content p {
+    color: #fff
+}
+
+.home-product .col .read-more {
+    display: block;
+    text-transform: uppercase;
+    border: 1px solid #25bce9;
+    color: #25bce9;
+    border-radius: 5px;
+    padding: 15px 0;
+    margin-bottom: 10px
+}
+
+.home-product .col .read-more:hover {
+    background-color: #25bce9;
+    color: #fff;
+    transition: 1s ease
+}
+
+.home-product .col:nth-child(2n) .read-more {
+    color: #fff;
+    border-color: #fff
+}
+
+.home-product .col:nth-child(2n) .read-more:hover {
+    background-color: #fff;
+    color: #25bce9
+}
+
+.home-product .head h3 a {
+    font-size: 23px;
+    font-weight: 500
+}
+
+.home-product .owl-stage-outer {
+    padding-top: 12px;
+    z-index: 999
+}
+
+.home-product .owl-dots {
+    position: absolute;
+    top: -32px
+}
+
+.home-banner {
+    padding: 20px 0 10px
+}
+
+.production-process {
+    padding: 60px 0
+}
+
+.production-process .image-production {
+    text-align: center
+}
+
+.production-process .image-production img {
+    width: 100%
+}
+
+.production-process .item-production {
+    border-bottom: 2px dotted #52a41b;
+    margin-bottom: 10px;
+    padding-bottom: 10px
+}
+
+.production-process .item-production:nth-child(2) {
+    border-bottom: 2px dotted #217999
+}
+
+.production-process .item-production:nth-child(3) {
+    border-bottom: 2px dotted #dea909
+}
+
+.production-process .item-production:nth-child(4) {
+    border-bottom: 2px dotted #e00000
+}
+
+.production-process .item-production .icon-production {
+    float: left;
+    margin-right: 25px
+}
+
+.production-process .item-production .icon-production img {
+    height: 90px
+}
+
+.production-process .item-production .des-production h4 {
+    color: #52a41c;
+    line-height: 1.4em;
+    font-size: 16px;
+    margin-bottom: 10px
+}
+
+.production-process .item-production:nth-child(2) .des-production h4 {
+    color: #22789b
+}
+
+.production-process .item-production:nth-child(3) .des-production h4 {
+    color: #dfa909
+}
+
+.production-process .item-production:nth-child(4) .des-production h4 {
+    color: #e00000
+}
+
+.production-process .item-production .des-production p {
+    font-size: 14px;
+    color: #888;
+    line-height: 20px;
+    margin: 0
+}
+
+.our-capacity {
+    padding: 60px 0;
+    background-image: url(../images/bg-our-capacity.jpg);
+    text-align: center
+}
+
+.our-capacity .impression-title h3, .our-capacity .impression-title p {
+    color: #fff !important
+}
+
+.our-capacity .col .circle-number {
+    background: url(../images/circle1.png) center center no-repeat;
+    background-size: cover;
+    width: 187px;
+    height: 187px;
+    font-size: 24px;
+    color: #fd5b4e;
+    margin: 0 auto;
+    text-align: :center;
+    line-height: 187px
+}
+
+.our-capacity .col:nth-child(2) .circle-number {
+    background: url(../images/circle2.png) center center no-repeat;
+    background-size: cover;
+    color: #ffa63e
+}
+
+.our-capacity .col:nth-child(3) .circle-number {
+    background: url(../images/circle3.png) center center no-repeat;
+    background-size: cover;
+    color: #25bce9
+}
+
+.our-capacity .col:nth-child(4) .circle-number {
+    background: url(../images/circle4.png) center center no-repeat;
+    background-size: cover;
+    color: #5cc99f
+}
+
+.our-capacity .oc-content {
+    color: #fff
+}
+
+.our-capacity .oc-content h4 {
+    margin: 30px 0;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase
+}
+
+.our-capacity .oc-content p {
+    margin: 0;
+    padding: 0 10px;
+    text-align: center
+}
+
+.home-technology {
+    padding: 60px 0 30px
+}
+
+.home-technology .news_cat .owl-item {
+    padding: 0 10px
+}
+
+.home-technology .news_cat .img {
+    position: relative;
+    overflow: hidden;
+    max-height: 220px;
+    transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease
+}
+
+.home-technology .news_cat .img img {
+    width: 100%;
+    min-height: 220px
+}
+
+.home-technology .news_cat .img:hover img {
+    transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.1, 1.1);
+    -moz-transform: scale(1.1, 1.1);
+    -o-transform: scale(1.1, 1.1);
+    -ms-transform: scale(1.1, 1.1);
+    transition: 1s ease
+}
+
+.home-technology .news_cat .content h3 {
+    color: #444;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-transform: uppercase
+}
+
+.home-technology .news_cat .content p {
+    font-size: 14px;
+    line-height: 1.5em;
+    margin-bottom: 15px;
+    text-align: justify;
+    display: -webkit-box
+}
+
+.home-technology .news_cat .btn-readmore a {
+    text-transform: uppercase;
+    display: inline-block;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 15px 0;
+    background: 0 0;
+    border: 1px solid #25bce9;
+    color: #25bce9 !important;
+    -webkit-border-radius: .25em;
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+    font-weight: 500;
+    padding: 10px 20px
+}
+
+.home-technology .news_cat .btn-readmore a:hover {
+    background-color: #25bce9;
+    color: #fff !important;
+    transition: 1s ease
+}
+
+.home-blog {
+    background: url(../images/bg-home-blog.jpg) 50% 17px no-repeat;
+    min-height: 500px;
+    padding-top: 55px;
+    padding-bottom: 55px;
+    width: 100%
+}
+
+.home-blog .item-large {
+    position: relative
+}
+
+.home-blog .item-large img {
+    height: 473px;
+    width: 100%
+}
+
+.home-blog .info-large {
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    display: table;
+    padding-top: 5px;
+    padding-bottom: 15px
+}
+
+.home-blog .info-large .info {
+    width: 90%;
+    float: left;
+    background: 0 0;
+    border: none;
+    text-align: left;
+    padding-left: 15px
+}
+
+.home-blog .info-large .info h4 {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 16px
+}
+
+.home-blog .info-large .info a {
+    color: #fff
+}
+
+.home-blog .info-large .info p {
+    margin-top: 5px;
+    display: -webkit-box
+}
+
+.home-blog .info-large .date-created {
+    display: table-cell;
+    vertical-align: middle;
+    width: 70px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 30px
+}
+
+.home-blog .news-item {
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+.home-blog .news-item li {
+    padding: 19.5px 0;
+    border-bottom: 1px dotted #fff;height:auto;
+}
+
+.home-blog .news-item li:first-child {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 0 0 12px;
+    font-weight: 500
+}
+
+.home-blog .news-item li:first-child span a {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.home-blog .news-item .publtime {
+    margin: 5px 0;
+    font-size: 13px
+}
+
+.home-blog .news-item li p {
+    display: -webkit-box
+}
+
+.home-blog .news-item img {
+    height: 80px;
+    width: 110px;
+    margin-left: 15px;
+    margin-top: 5px
+}
+
+.home-blog .news-item h4 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 400
+}
+
+.produce-home h2, .readmore a {
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.home-blog .news-item h4 a {
+    color: #fff
+}
+
+.produce-home {
+    background-color: #fff;
+    color: #000;
+    padding: 30px 0;
+    width: 100%
+}
+
+.produce-home h2 {
+    padding: 30px 0;
+    font-size: 18px;
+    text-align: center;color: #666;font-weight: 600
+}
+
+.produce-home .list-logo {
+    overflow: hidden
+}
+
+.produce-home .list-logo li {
+    float: left;
+    margin-left: -100px
+}
+
+.produce-home .list-logo li img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    width: 40%;
+    display: block
+}
+
+.produce-home .list-logo li:hover img {
+    filter: grayscale(0)
+}
+
+.readmore {
+    text-align: center;
+    margin-top: 60px
+}
+
+.readmore a {
+    border: 1px solid #25bce9;
+    background-color: #25bce9;
+    color: #fff;
+    padding: 10px 35px;
+    border-radius: 4px;
+    display: inline-block
+}
+
+.readmore a:hover {
+    border-color: #25bce9;
+    background-color: #fff;
+    color: #25bce9;
+    transition: 1s ease
+}
+
+.banner_middle .banner .nv-block-banners:nth-child(1) {
+    margin-bottom: 15px
+}
+
+.banner_middle .banner .nv-block-banners:nth-child(2) {
+    margin-top: 20px
+}
+
+.banner_middle .banner .nv-block-banners:nth-child(1) img {
+    height: 202px
+}

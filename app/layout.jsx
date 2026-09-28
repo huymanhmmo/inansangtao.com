@@ -1,5 +1,5 @@
-import './site.css';
 import Header from './ui/Header';
+import Footer from './ui/Footer';
 
 export const metadata = {
   metadataBase: new URL('https://inansangtao.com'),
@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return <html lang="vi"><body><Header />{children}<footer className="footer"><div className="wrap footer-inner"><a className="brand brand-light" href="/">IN ẤN <span>SÁNG TẠO</span></a><p>Chia sẻ thành công, kết nối đam mê.</p><a href="/lien-he/">Liên hệ tư vấn <span aria-hidden="true">↗</span></a></div><div className="footer-bottom"><div className="wrap">© {new Date().getFullYear()} In Ấn Sáng Tạo</div></div></footer></body></html>
+  return <html lang="vi"><head><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/assets/css/font-awesome.min.css"/><link rel="stylesheet" href="/themes/default/css/bootstrap.min.css"/><link rel="stylesheet" href="/themes/default/css/style.css"/><link rel="stylesheet" href="/themes/default/css/home.css"/><link rel="stylesheet" href="/themes/default/css/animate.css"/><link rel="stylesheet" href="/themes/default/css/style.responsive.css"/><link rel="stylesheet" href="/themes/default/css/news.css"/><link rel="stylesheet" href="/themes/default/css/shops.css"/><link rel="stylesheet" href="/themes/default/css/photos.css"/><link rel="stylesheet" href="/themes/default/css/legacy-conversion.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=vietnamese"/></head><body><div className="wsmenucontainer clearfix"><div className="overlapblackbg"/><div className="body-bg"><Header />{children}<Footer /></div></div></body></html>
 }

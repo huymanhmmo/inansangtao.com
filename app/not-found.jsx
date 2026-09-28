@@ -1,3 +1,3 @@
 export default function NotFound() {
-  return <main className="not-found wrap"><span className="eyebrow">404 • KHÔNG TÌM THẤY</span><h1>Trang này đã<br /><em>đi lạc mất rồi.</em></h1><a className="button button-primary" href="/">Quay về trang chủ <span aria-hidden="true">↗</span></a></main>;
+  return <main className="site-content"><div className="wraper"><div className="error-box-wrap"><div className="error-box text-center"><h2>404</h2><h3>Không tìm thấy trang</h3><p>Trang bạn yêu cầu hiện không có trong website.</p></div><div className="error-action text-center"><a href="/">Quay lại trang chủ</a></div></div></div></main>;
 }

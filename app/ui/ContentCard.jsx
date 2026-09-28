@@ -1,4 +1,0 @@
-export default function ContentCard({ item, kind = 'news' }) {
-  const href = kind === 'product' ? `/${item.categoryAlias ?? 'san-pham'}/${item.alias}-${item.id}/` : `/${item.categoryAlias ?? 'tin-tuc'}/${item.alias}-${item.id}/`;
-  return <article className="card"><a className="card-image" href={href}>{item.image ? <img src={item.image} alt={item.imageAlt || item.title} loading="lazy" /> : <span className="image-placeholder">{kind === 'product' ? 'SẢN PHẨM' : 'IN ẤN'}</span>}<span className="card-arrow" aria-hidden="true">↗</span></a><div className="card-copy">{kind === 'news' && <span className="eyebrow">{item.categoryTitle || 'Kiến thức in ấn'}</span>}<h3><a href={href}>{item.title}</a></h3>{item.summary && <p>{item.summary.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}</p>}{kind === 'product' && <a className="text-link" href={href}>Xem dịch vụ <span aria-hidden="true">→</span></a>}</div></article>
-}
