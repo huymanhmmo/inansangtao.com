@@ -1,5 +1,5 @@
 #menusite .navbar{margin:0;min-height:0;border:0;background:transparent}
-.wrap{width:1115px;max-width:100%;margin:0 auto;padding:0 15px}
+.wrap{width:1115px;max-width:100%;margin:0 auto;padding:0}
 #menusite .navbar-nav>li.dropdown:hover>.dropdown-menu{display:block}
 #menusite .dropdown-menu{z-index:1100}
 #header .logo img{max-width:100%;height:auto}
@@ -55,4 +55,4 @@
 .produce-home .list-logo.marquee li img{width:100%;height:auto}
 @keyframes legacyMarquee{to{transform:translateX(-50%)}}
 @media(max-width:767px){.home-product .col .pg-item{height:440px}.produce-home .list-logo.marquee li{flex-basis:120px}}
-@media(max-width:767px){.wrap{width:100%}.shops-catalogs{padding-left:15px}}
+@media(max-width:767px){.wrap{width:100%;padding:0 15px}.shops-catalogs{padding-left:15px}}
