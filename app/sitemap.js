@@ -3,13 +3,16 @@ import content from '../src/data/content.json';
 export const dynamic = 'force-static';
 
 const origin = 'https://inansangtao.com';
-const paths = new Set(['/', '/blog/', '/shops/', '/lien-he/', '/photos/']);
+const paths = new Set(['/', '/blog/', '/shops/', '/lien-he/', '/contact/', '/photos/']);
+paths.add('/design/');
 for (const page of content.pages) paths.add(`/${page.alias}/`);
 for (const category of content.categories) paths.add(`/${category.alias}/`);
 for (const category of content.productCategories) paths.add(`/${category.moduleName}/${category.alias}/`);
 for (const item of content.news) {
-  const category = content.categories.find((entry) => entry.id === item.categoryId);
-  paths.add(`/${category?.alias || 'tin-tuc'}/${item.alias}-${item.id}/`);
+  for (const categoryId of new Set(item.categoryIds)) {
+    const category = content.categories.find((entry) => entry.id === categoryId);
+    if (category) paths.add(`/${category.alias}/${item.alias}-${item.id}/`);
+  }
 }
 for (const item of content.products) {
   const category = content.productCategories.find((entry) => entry.moduleName === item.moduleName && item.categoryIds.includes(entry.id));

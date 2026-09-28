@@ -19,7 +19,7 @@ if (!fs.existsSync(sqlPath)) {
 }
 
 const dump = fs.readFileSync(sqlPath, 'utf8');
-const wanted = /^(?:ccgdev_vi_news_\d+|ccgdev_vi_news_detail|ccgdev_vi_news_cat|ccgdev_vi_news_topics|ccgdev_vi_page|ccgdev_shops_rows|ccgdev_shops_catalogs|ccgdev_an_pham_tet_2019_rows|ccgdev_an_pham_tet_2019_catalogs|ccgdev_vi_photos_rows|ccgdev_vi_photos_album|ccgdev_vi_photos_category|ccgdev_vi_menu|ccgdev_vi_menu_rows|ccgdev_vi_slider_rows|ccgdev_banners_rows|ccgdev_vi_produce_home_rows|ccgdev_vi_production_process_rows|ccgdev_config)$/;
+const wanted = /^(?:ccgdev_vi_news_\d+|ccgdev_vi_news_detail|ccgdev_vi_news_cat|ccgdev_vi_news_topics|ccgdev_vi_page|ccgdev_shops_rows|ccgdev_shops_catalogs|ccgdev_shops_block|ccgdev_an_pham_tet_2019_rows|ccgdev_an_pham_tet_2019_catalogs|ccgdev_vi_photos_rows|ccgdev_vi_photos_album|ccgdev_vi_photos_category|ccgdev_vi_menu|ccgdev_vi_menu_rows|ccgdev_vi_slider_rows|ccgdev_banners_rows|ccgdev_vi_produce_home_rows|ccgdev_vi_production_process_rows|ccgdev_vi_blocks_groups|ccgdev_config)$/;
 const tables = new Map();
 
 function parseValues(input) {
@@ -95,7 +95,7 @@ while ((match = insert.exec(dump))) {
 }
 
 const tableRows = (name) => tables.get(name) ?? [];
-const news = [...tables.entries()]
+const newsRows = [...tables.entries()]
   .filter(([name]) => /^ccgdev_vi_news_\d+$/.test(name))
   .flatMap(([, rows]) => rows)
   .filter((item) => Number(item.status) === 1 && item.alias)
@@ -110,6 +110,13 @@ const news = [...tables.entries()]
       body: detail.bodyhtml ?? '',
     };
   });
+const newsById = new Map();
+for (const item of newsRows) {
+  const existing = newsById.get(item.id);
+  if (existing) existing.categoryIds = [...new Set([...existing.categoryIds, ...item.categoryIds])];
+  else newsById.set(item.id, item);
+}
+const news = [...newsById.values()];
 const categories = tableRows('ccgdev_vi_news_cat').filter((item) => Number(item.status) !== 0).map((item) => ({
   id: Number(item.catid), title: item.title, alias: item.alias, description: item.description ?? '',
   image: item.image ?? '', parentId: Number(item.parentid ?? 0),
@@ -132,7 +139,7 @@ const productCategories = [
   ...tableRows('ccgdev_shops_catalogs').map((item) => ({ ...item, moduleName: 'shops' })),
   ...tableRows('ccgdev_an_pham_tet_2019_catalogs').map((item) => ({ ...item, moduleName: 'an-pham-tet-2019' })),
 ].map((item) => ({
-  id: Number(item.catid), moduleName: item.moduleName, title: item.vi_title, alias: item.vi_alias,
+  id: Number(item.catid), parentId: Number(item.parentid ?? 0), weight: Number(item.sort ?? item.weight ?? item.catid), moduleName: item.moduleName, title: item.vi_title, alias: item.vi_alias,
   description: item.vi_description ?? '', image: item.image ?? '',
 }));
 const photoCategories = tableRows('ccgdev_vi_photos_category').filter((item) => Number(item.status) === 1).map((item) => ({
@@ -187,13 +194,55 @@ const productionProcess = tableRows('ccgdev_vi_production_process_rows')
   .filter((item) => Number(item.status) === 1)
   .sort((a, b) => Number(a.weight) - Number(b.weight))
   .map((item) => ({ title: item.title, description: item.description ?? '', link: item.link_href ?? '', image: mediaFromUpload('production-process', item.image), imageContent: item.image_content ?? '' }));
+const parseFlatPhpConfig = (value = '') => {
+  const result = {};
+  const pattern = /s:\d+:"([^"]+)";s:\d+:"([\s\S]*?)";|s:\d+:"([^"]+)";i:(-?\d+);/g;
+  for (const match of String(value).matchAll(pattern)) {
+    if (match[1]) result[match[1]] = match[2];
+    else if (match[3]) result[match[3]] = Number(match[4]);
+  }
+  return result;
+};
+const blockGroups = tableRows('ccgdev_vi_blocks_groups');
+const featuredOrder = {
+  38: [35, 34, 33, 32, 29, 50, 42, 41, 40, 36],
+  37: [28, 26, 23, 20, 19, 40, 38, 35, 31, 29],
+};
+const featuredGroups = [38, 37].map((bid) => {
+  const block = blockGroups.find((entry) => Number(entry.bid) === bid);
+  const config = parseFlatPhpConfig(block?.config);
+  const productsInGroup = tableRows('ccgdev_shops_block')
+    .filter((entry) => Number(entry.bid) === Number(config.blockid))
+    .map((entry) => products.find((product) => product.moduleName === 'shops' && product.id === Number(entry.id)))
+    .filter(Boolean)
+    .sort((a, b) => featuredOrder[bid].indexOf(a.id) - featuredOrder[bid].indexOf(b.id))
+    .slice(0, Number(config.numget) || 10);
+  return { bid, title: block?.title ?? '', link: block?.link ?? '', products: productsInGroup };
+});
+const capacityBlock = blockGroups.find((entry) => Number(entry.bid) === 50);
+const capacityConfig = parseFlatPhpConfig(capacityBlock?.config);
+const homepage = {
+  productGroups: featuredGroups,
+  technology: (() => {
+    const block = blockGroups.find((entry) => Number(entry.bid) === 36);
+    return { title: block?.title ?? '', link: block?.link ?? '', description: block?.description ?? '' };
+  })(),
+  capacity: {
+    title: capacityBlock?.title ?? '', description: capacityBlock?.description ?? '',
+    items: [1, 2, 3, 4].map((number) => ({
+      value: capacityConfig[`number${number}`] ?? '',
+      title: capacityConfig[`title${number}`] ?? '',
+      description: capacityConfig[`des${number}`] ?? '',
+    })),
+  },
+};
 const content = {
   site: {
     name: config.site_name || 'IN ẤN SÁNG TẠO',
     description: config.site_description || 'Chia sẻ thành công, kết nối đam mê',
     logo: mediaFromUpload('', config.site_logo || 'logo.png'),
   },
-  menuGroups, menu, slider, banners, produceHome, productionProcess,
+  menuGroups, menu, slider, banners, produceHome, productionProcess, homepage,
   news, categories, pages, products, productCategories, photoCategories, photoAlbums, photos,
 };
 const dataDir = path.join(root, 'src', 'data');
@@ -217,6 +266,7 @@ for (const item of [...slider, ...banners, ...produceHome, ...productionProcess]
   collect(item.image);
   collect(item.contentImage);
 }
+for (const item of blockGroups) collect(item.config);
 collect(content.site.logo);
 const publicDir = path.join(root, 'public', 'uploads');
 let copied = 0;

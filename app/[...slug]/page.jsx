@@ -7,7 +7,8 @@ const getRoute = (item) => `${item.alias}-${item.id}`;
 const categoryForNews = (item) => newsCategories[item.categoryId];
 const categoryForProduct = (item) => content.productCategories.find((category) => category.moduleName === item.moduleName && item.categoryIds?.includes(category.id));
 const staticParams = [
-  ...content.news.map((item) => [categoryForNews(item)?.alias || 'blog', getRoute(item)]),
+  ['design'],
+  ...content.news.flatMap((item) => [...new Set(item.categoryIds)].map((categoryId) => [newsCategories[categoryId]?.alias || categoryForNews(item)?.alias || 'blog', getRoute(item)])),
   ...content.products.map((item) => [item.moduleName, categoryForProduct(item)?.alias || 'san-pham', item.alias]),
   ...content.categories.map((category) => [category.alias]),
   ...content.productCategories.map((category) => [category.moduleName, category.alias]),
@@ -38,7 +39,9 @@ function findDetail(route, moduleName) {
 }
 
 function CategoryListing({ title, description, items, kind }) {
-  return <main className="wrap"><div className="row"><div className="col-xs-24"><div className="page"><h1>{title}</h1>{description && <p>{description}</p>}{kind === 'product' ? <div className="viewgrid row">{items.map((item) => { const href = `/${item.moduleName || 'shops'}/${item.categoryAlias}/${item.alias}/`; return <div className="col-xs-24 col-sm-12 col-md-6" key={`${item.moduleName}-${item.id}`}><div className="item"><div className="image"><a href={href} title={item.title}>{item.image && <img src={item.image} alt={item.imageAlt || item.title} />}</a></div><div className="caption text-center"><h3><a href={href}>{item.title}</a></h3><p className="price">{item.price > 0 ? `${item.price.toLocaleString('vi-VN')} ${item.unit || 'VND'}` : 'Liên hệ báo giá'}</p></div></div></div>; })}</div> : <div className="news_column row">{items.map((item) => <div className="col-xs-24 col-sm-12 col-md-12" key={item.id}><article className="news-items"><div className="img"><a href={`/${item.categoryAlias}/${item.alias}-${item.id}/`} title={item.title}>{item.image && <img alt={item.title} src={item.image} />}</a><div className="the-date">{new Date(item.publishedAt * 1000).toLocaleDateString('vi-VN')}</div></div><div className="content"><h3><a href={`/${item.categoryAlias}/${item.alias}-${item.id}/`} title={item.title}>{item.title}</a></h3><p>{item.summary.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}</p></div><div className="button"><a href={`/${item.categoryAlias}/${item.alias}-${item.id}/`}><button type="button" className="btn btn-readmore">Đọc tiếp</button></a></div></article></div>)}</div>}</div></div></div></main>;
+  if (kind === 'product') return <main className="wrap"><div className="row"><div className="col-xs-24"><div className="page"><h1>{title}</h1>{description && <p>{description}</p>}<div className="viewgrid row">{items.map((item) => { const href = `/${item.moduleName || 'shops'}/${item.categoryAlias}/${item.alias}/`; return <div className="col-xs-24 col-sm-12 col-md-6" key={`${item.moduleName}-${item.id}`}><div className="item"><div className="image"><a href={href} title={item.title}>{item.image && <img src={item.image} alt={item.imageAlt || item.title} />}</a></div><div className="caption text-center"><h3><a href={href}>{item.title}</a></h3><p className="price">{item.price > 0 ? `${item.price.toLocaleString('vi-VN')} ${item.unit || 'VND'}` : 'Liên hệ báo giá'}</p></div></div></div>; })}</div></div></div></div></main>;
+  const article = (item) => <article className="category-news" key={item.id}><h2><a href={`/${item.categoryAlias}/${item.alias}-${item.id}/`} title={item.title}>{item.title}</a></h2><div className="text-muted"><i className="fa fa-clock-o" /> {new Date(item.publishedAt * 1000).toLocaleDateString('vi-VN')} <i className="fa fa-eye" /> {item.hits || ''}</div>{item.image && <div className="post-thumbnail"><a href={`/${item.categoryAlias}/${item.alias}-${item.id}/`}><img src={item.image} alt={item.imageAlt || item.title} /></a></div>}<p>{item.summary.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}</p></article>;
+  return <main className="wrap"><div className="row"><div className="col-xs-24 col-md-16"><div className="news_column"><h1>{title}</h1>{description && <p>{description}</p>}{items.map((item, index) => article(item, index === 0))}</div></div><aside className="col-xs-24 col-md-8 widget-right"><div className="block-border"><h3>Mạng xã hội</h3><ul className="socialList"><li><a href="https://facebook.com/Inansangtao.Com.0903419596/">Facebook</a></li><li><a href="https://youtube.com/">YouTube</a></li></ul></div></aside></div></main>;
 }
 
 export async function generateMetadata({ params }) {
@@ -55,7 +58,8 @@ export default async function LegacyRoute({ params }) {
   const item = findDetail(last, slug[0]);
   if (item) {
     const categoryAlias = item.category?.alias;
-    const detailHref = item.type === 'product' ? `/${item.moduleName}/${categoryAlias || 'san-pham'}/${item.alias}/` : `/${categoryAlias || 'blog'}/${item.alias}-${item.id}/`;
+    const requestedCategory = content.categories.find((entry) => entry.alias === slug[0] && item.categoryIds?.includes(entry.id));
+    const detailHref = item.type === 'product' ? `/${item.moduleName}/${categoryAlias || 'san-pham'}/${item.alias}/` : `/${requestedCategory?.alias || categoryAlias || 'blog'}/${item.alias}-${item.id}/`;
     const contact = item.type === 'product' ? <a className="hotline" href="tel:0911618185">Liên hệ đặt hàng: 0911 618 185</a> : null;
     return <main className="wrap"><div className="row"><div className="col-xs-24"><div className="detail"><h1>{item.title}</h1>{item.type === 'news' && <div className="dt-info"><ul><li><i className="fa fa-calendar-o" /> {new Date(item.publishedAt * 1000).toLocaleDateString('vi-VN')}</li></ul></div>}{item.image && <figure className="article left"><img className="img-thumbnail" src={item.image} alt={item.imageAlt || item.title} /></figure>}{item.summary && <div className="hometext m-bottom" dangerouslySetInnerHTML={{ __html: safeHtml(item.summary) }} />}{item.type === 'product' && <div className="product-action">{contact}</div>}<div id="news-bodyhtml" className="bodytext margin-bottom-lg" dangerouslySetInnerHTML={{ __html: safeHtml(item.body) }} />{item.type === 'product' && <div className="product-action product-action-bottom">{contact}</div>}</div><div className="news_column panel panel-default"><div className="panel-body"><div className="fb-comments" data-width="100%" data-href={`https://inansangtao.com${detailHref}`} data-num-posts="5" data-adapt-container-width="true" /></div></div></div></div></main>;
   }
@@ -63,7 +67,10 @@ export default async function LegacyRoute({ params }) {
   if (page) return <main className="wrap"><div className="row"><div className="col-xs-24"><div className="page"><h1>{page.title}</h1>{page.image && <img className="img-thumbnail pull-left imghome" src={page.image} alt={page.title} />}<div className="hometext">{page.description}</div><div className="bodytext" dangerouslySetInnerHTML={{ __html: safeHtml(page.body) }} /></div></div></div></main>;
   const newsCategory = content.categories.find((entry) => entry.alias === last);
   if (newsCategory) {
-    const items = content.news.filter((entry) => entry.categoryIds.includes(newsCategory.id)).map((entry) => ({ ...entry, categoryAlias: newsCategory.alias, categoryTitle: newsCategory.title }));
+    const descendantIds = new Set([newsCategory.id]);
+    let hasDescendants = true;
+    while (hasDescendants) { hasDescendants = false; for (const category of content.categories) if (descendantIds.has(category.parentId) && !descendantIds.has(category.id)) { descendantIds.add(category.id); hasDescendants = true; } }
+    const items = content.news.filter((entry) => entry.categoryIds.some((id) => descendantIds.has(id))).sort((a, b) => b.publishedAt - a.publishedAt).map((entry) => ({ ...entry, categoryAlias: newsCategory.alias, categoryTitle: newsCategory.title }));
     return <CategoryListing title={newsCategory.title} description={newsCategory.description} items={items} kind="news" />;
   }
   const productCategory = content.productCategories.find((entry) => entry.alias === last && entry.moduleName === slug[0]);
@@ -72,7 +79,7 @@ export default async function LegacyRoute({ params }) {
     return <CategoryListing title={productCategory.title} description={productCategory.description} items={items} kind="product" />;
   }
   const moduleProducts = content.products.filter((entry) => entry.moduleName === last);
-  if (slug.length === 1 && moduleProducts.length) return <CategoryListing title={last === 'shops' ? 'Dịch vụ' : 'Ấn phẩm Tết 2019'} description="" items={moduleProducts.map((entry) => ({ ...entry, categoryAlias: categoryForProduct(entry)?.alias }))} kind="product" />;
+  if (slug.length === 1 && moduleProducts.length) return <CategoryListing title="Ấn phẩm Tết 2019" description="" items={moduleProducts.map((entry) => ({ ...entry, categoryAlias: categoryForProduct(entry)?.alias }))} kind="product" />;
   if (slug[0] === 'photos') {
     const photoCategory = content.photoCategories.find((entry) => entry.alias === slug[1]);
     const albumSlug = slug[2] || '';

@@ -10,7 +10,7 @@ export function legacyHref(value = '') {
     const url = new URL(href, 'https://inansangtao.com');
     const module = url.searchParams.get('nv');
     const operation = (url.searchParams.get('op') || '').replace(/\.html?$/i, '');
-    if (module === 'contact') return '/lien-he/';
+    if (module === 'contact') return '/contact/';
     if (module === 'photos') return '/photos/';
     if (module === 'qua-tang-su-kien') return '/shops/';
     if (module === 'shops' || module === 'an-pham-tet-2019') {
@@ -78,14 +78,14 @@ export function legacyHref(value = '') {
     }
     return category ? `/photos/${category.alias}/` : '/photos/';
   }
-  if (href.startsWith('/blog/') || href.startsWith('/news/')) {
+  if (href.startsWith('/news/') || content.categories.some((entry) => href.startsWith(`/${entry.alias}/`))) {
     const parts = href.split('/').filter(Boolean);
     const category = content.categories.find((entry) => entry.alias === parts[0]);
     const last = (parts.at(-1) || '').replace(/\.html?$/i, '').replace(/-\d+$/, '');
     const article = content.news.find((entry) => entry.alias === last);
     if (article) {
       const parent = content.categories.find((entry) => entry.id === article.categoryId);
-      return `/${parent?.alias || 'blog'}/${article.alias}-${article.id}/`;
+      return `/${category && article.categoryIds.includes(category.id) ? category.alias : parent?.alias || 'blog'}/${article.alias}-${article.id}/`;
     }
     return category ? `/${category.alias}/` : '/blog/';
   }
