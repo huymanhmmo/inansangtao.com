@@ -56,3 +56,37 @@
 @keyframes legacyMarquee{to{transform:translateX(-50%)}}
 @media(max-width:767px){.home-product .col .pg-item{height:440px}.produce-home .list-logo.marquee li{flex-basis:120px}}
 @media(max-width:767px){.wrap{width:100%;padding:0 15px}.shops-catalogs{padding-left:15px}}
+@media(max-width:767px){
+  #header{display:flex!important;flex-wrap:wrap;align-items:center}
+  #header>.logo{float:none;width:100%;padding:14px 15px 8px;text-align:center}
+  #header>.logo img{width:auto;max-width:min(100%,220px);max-height:76px;object-fit:contain}
+  #header>.logo+div{float:none;width:100%;padding:0 10px 12px}
+  #menusite .navbar-nav{display:flex;float:none;flex-wrap:wrap;justify-content:center;margin:0}
+  #menusite .navbar-nav>li{float:none}
+  #menusite .navbar-nav>li>a{padding:10px 8px;font-size:12px;line-height:18px}
+  #menusite .dropdown-menu{max-width:calc(100vw - 30px)}
+  .header-nav .social-icons,.header-nav .contactDefault{float:none;text-align:center}
+  .header-nav .social-icons{margin:4px 0}
+  .header-nav .contactDefault{padding:4px 8px 8px;line-height:22px;overflow-wrap:anywhere}
+  .home-slider .owl-item>.item .slide-content{top:20%!important;padding:0 20px!important}
+  .home-slider .owl-item>.item .slide-content h3{font-size:clamp(24px,5vw,34px)!important;line-height:1.15}
+  .home-slider .owl-item>.item .slide-content h4{font-size:clamp(16px,3.5vw,20px)!important;line-height:1.3}
+  .contact-map{height:320px}
+  .contact-page .info-company{min-height:0;margin-bottom:24px;padding:18px}
+  .contact-page .info-company h2{font-size:17px;line-height:1.4;margin-bottom:18px}
+  .contact-page .info-company li{padding-left:48px;overflow-wrap:anywhere}
+  .contact-page .form-contact{padding:0 4px}
+  .contact-page .input-group{width:100%}
+  .contact-page .input-group .form-control{min-width:0}
+  .legacy-breadcrumb{height:auto;min-height:48px;padding:13px 0;font-size:14px}
+  .category-news h2{font-size:21px;line-height:1.35;overflow-wrap:anywhere}
+  .category-news img,.contact-page img{max-width:100%;height:auto}
+  #footer .menu li{overflow-wrap:anywhere}
+}
+@media(max-width:479px){
+  .home-slider .owl-item>.item .slide-content{top:16%!important;padding:0 14px!important}
+  .home-slider .owl-item>.item .slide-content h3{font-size:clamp(21px,6vw,28px)!important}
+  .home-slider .owl-item>.item .slide-content h4{font-size:clamp(14px,4vw,17px)!important}
+  .home-slider .owl-item>.item .slide-content .btn{padding:8px 14px;font-size:12px}
+  .contact-map{height:260px}
+}
