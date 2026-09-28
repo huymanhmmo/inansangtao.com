@@ -18,6 +18,8 @@
 .home-product .product-groups .owl-stage-outer{padding-top:12px}
 .home-banner .banner img,.production-process .nv-block-banners img{width:100%;height:auto}
 .legacy-breadcrumb{height:57px;border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;color:#888;font-size:16px;padding:15px 0}
+.legacy-breadcrumb{margin-top:142px}
+main.wrap:not(.shops-index):not(.contact-page){margin-top:142px}
 .legacy-breadcrumb span{float:right;color:#6d85b4}
 .shops-index{padding-top:28px;padding-bottom:40px}
 .shops-sidebar h3{color:#6d85b4;font-size:18px;font-weight:400;text-transform:uppercase;margin:0 0 20px}
